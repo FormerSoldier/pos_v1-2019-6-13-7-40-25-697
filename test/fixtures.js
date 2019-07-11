@@ -1,5 +1,7 @@
 'use strict';
 
+import { ModuleMap } from "jest-haste-map";
+
 function loadAllItems() {
   return [
     {
@@ -53,3 +55,5 @@ function loadPromotions() {
     }
   ];
 }
+
+module

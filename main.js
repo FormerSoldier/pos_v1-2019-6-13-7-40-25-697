@@ -21,7 +21,7 @@ var statisticsCountByBarcodes = (shoppingList)=> {
 };
 
 var transformWithMoreInfo = (items, objList) => {
-    let temp;
+    let temp = undefined;
     return objList.map((obj) => {
         items.forEach((item) => {
             if(obj['barcode'] == item['barcode']){
@@ -38,13 +38,22 @@ var transformWithMoreInfo = (items, objList) => {
     });
 }
 // function transformShoppingListToObjArrWithMoreInfo is consist of statisticsCountByBarcodes and transformWithMoreInfo
-var  transformShoppingListToObjArrWithMoreInfo = () => {
-
+var  transformShoppingListToObjArrWithMoreInfo = (invalidBarcode,ShoppingList,items) => {
+    if(invalidBarcode.length != 0)
+        return "[ERROR]: invalid barcode";
+    let objList = statisticsCountByBarcodes(ShoppingList);
+    let transformResult = transformWithMoreInfo(items, objList);
+    return transformResult;
 }
+
+
+
+
 
 
 module.exports={
     isBarcodeValid,
     statisticsCountByBarcodes,
-    transformWithMoreInfo
+    transformWithMoreInfo,
+    transformShoppingListToObjArrWithMoreInfo
 }
