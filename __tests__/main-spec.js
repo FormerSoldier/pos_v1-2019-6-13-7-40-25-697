@@ -37,7 +37,7 @@ const items = [
       price: 4.50
     }
   ];;
-
+  
 // test cases for function isBarcodeValid
 it('should return [] when call isBarcodeValid given ["ITEM000005","ITEM000001"]',() =>{
     expect(obj.isBarcodeValid(items,['ITEM000005','ITEM000001'])).toEqual([]);
@@ -46,12 +46,12 @@ it('should return [] when call isBarcodeValid given ["ITEM000005","ITEM000001"]'
 it('should return ["ITEM000006"] when call isBarcodeValid given ["ITEM000005","ITEM000006"]',() =>{
     expect(obj.isBarcodeValid(items,['ITEM000005','ITEM000006'])).toEqual(['ITEM000006']);
 });
-/*
+
 // test cases for function statisticsCountByBarcodes
 it('should return [{barcode:"ITEM000005",count:1},{barcode: "ITEM000001",count:2}] when call statisticsCountByBarcodes given ["ITEM000005","ITEM000001","ITEM000001"]',() =>{
-    expect(obj.statisticsCountByBarcodes(['ITEM000005','ITEM000001','ITEM000001'],['ITEM000005','ITEM000006'])).toEqual([{barcode:'ITEM000005',count:1},{barcode: 'ITEM000001',count:2}]);
+    expect(obj.statisticsCountByBarcodes(['ITEM000005','ITEM000001','ITEM000001'])).toEqual([{barcode:'ITEM000005',count:1},{barcode: 'ITEM000001',count:2}]);
 });
-
+/*
 // test cases for function transformWithMoreInfo
 it('should return [{barcode:"ITEM000005",count:1},{barcode: "ITEM000001",count:2}] when call transformWithMoreInfo given ["ITEM000005","ITEM000001","ITEM000001"]',() =>{
     expect(obj.transformWithMoreInfo(items,[{barcode:'ITEM000005',count:1},{barcode: 'ITEM000001',count:2}]))
