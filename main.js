@@ -46,13 +46,36 @@ var  transformShoppingListToObjArrWithMoreInfo = (invalidBarcode,ShoppingList,it
     return transformResult;
 }
 
-var calculateOriginFare = (transformResult) => {
-    return transformResult.reduce((sum, item) =>{
-        sum += item['price']*item['count']; 
-        return sum;
-    },0);
+// function calculateFare is consist of calculateOriginFare and calculateFareInPromotion
+var createReceipt = (promotion,transformResult) => {
+    let totalMoney = 0.0;
+    let promoteTotal = 0.0;
+    let receipt = '';
+    let oneTotal = 0.0;
+    let promoteMoney = 0.0;
+    receipt += '***<没钱赚商店>收据***\n'
+    transformResult.forEach((item) => {
+        oneTotal = item.price * item.count;
+        totalMoney += oneTotal;
+        if(promotion['barcodes'].includes(item['barcode']) && item['count'] > 2){
+            promoteMoney = item.count / 2 * item.price;
+            promoteTotal += promoteMoney;
+            oneTotal -= promoteMoney;
+        }           
+        receipt += `名称：雪碧，数量：${item.count}瓶，单价：${item.price.tofixed(2)}(元)，小计：${oneTotal}(元)\n`;  
+    });
+    receipt += `----------------------\n
+                总计：${totalMoney}(元)\n
+                节省：${promoteTotal}(元)\n
+                **********************`;
+    return receipt;
 }
 
+// function printReceipt is consist of isBarcodeValid, transformShoppingListToObjArrWithMoreInfo, calculateFare and transformToString
+var printReceipt = (promotion, transformResult, ) => {
+    
+
+}
 
 
 
@@ -62,5 +85,6 @@ module.exports={
     statisticsCountByBarcodes,
     transformWithMoreInfo,
     transformShoppingListToObjArrWithMoreInfo,
-    calculateOriginFare
+    createReceipt
+    
 }
