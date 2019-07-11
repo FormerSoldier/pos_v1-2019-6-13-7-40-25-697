@@ -20,7 +20,31 @@ var statisticsCountByBarcodes = (shoppingList)=> {
     });
 };
 
+var transformWithMoreInfo = (items, objList) => {
+    let temp;
+    return objList.map((obj) => {
+        items.forEach((item) => {
+            if(obj['barcode'] == item['barcode']){
+                temp = {
+                    barcode: obj['barcode'],
+                    name: item['name'],
+                    unit: item['unit'],
+                    price: item['price'],
+                    count: obj['count']
+                }
+            }           
+        });
+        return temp;
+    });
+}
+// function transformShoppingListToObjArrWithMoreInfo is consist of statisticsCountByBarcodes and transformWithMoreInfo
+var  transformShoppingListToObjArrWithMoreInfo = () => {
+
+}
+
+
 module.exports={
     isBarcodeValid,
-    statisticsCountByBarcodes
+    statisticsCountByBarcodes,
+    transformWithMoreInfo
 }
