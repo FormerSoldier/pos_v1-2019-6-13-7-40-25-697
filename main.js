@@ -46,6 +46,12 @@ var  transformShoppingListToObjArrWithMoreInfo = (invalidBarcode,ShoppingList,it
     return transformResult;
 }
 
+var calculateOriginFare = (transformResult) => {
+    return transformResult.reduce((sum, item) =>{
+        sum += item['price']*item['count']; 
+        return sum;
+    },0);
+}
 
 
 
@@ -55,5 +61,6 @@ module.exports={
     isBarcodeValid,
     statisticsCountByBarcodes,
     transformWithMoreInfo,
-    transformShoppingListToObjArrWithMoreInfo
+    transformShoppingListToObjArrWithMoreInfo,
+    calculateOriginFare
 }
