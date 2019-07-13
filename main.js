@@ -47,44 +47,44 @@ var  transformShoppingListToObjArrWithMoreInfo = (invalidBarcode,ShoppingList,it
 }
 
 // function calculateFare is consist of calculateOriginFare and calculateFareInPromotion
-var createReceipt = (promotion,transformResult) => {
+var createReceipt = (promotions,transformResult) => {
     let totalMoney = 0.0;
     let promoteTotal = 0.0;
     let receipt = '';
     let oneTotal = 0.0;
     let promoteMoney = 0.0;
-    receipt += '***<没钱赚商店>收据***\n'
+    let promotion = promotions[0];
+    receipt += '***<没钱赚商店>收据***\n\n'
     transformResult.forEach((item) => {
         oneTotal = item.price * item.count;
-        totalMoney += oneTotal;
         if(promotion['barcodes'].includes(item['barcode']) && item['count'] > 2){
-            promoteMoney = item.count / 2 * item.price;
+            promoteMoney = Math.floor(item.count / 2) * item.price;
             promoteTotal += promoteMoney;
             oneTotal -= promoteMoney;
         }           
-        receipt += `名称：雪碧，数量：${item.count}瓶，单价：${item.price.tofixed(2)}(元)，小计：${oneTotal}(元)\n`;  
+        totalMoney += oneTotal;
+        receipt += `名称：雪碧，数量：${item.count}瓶，单价：${item.price.toFixed(2)}(元)，小计：${oneTotal.toFixed(2)}(元)\n`;  
     });
-    receipt += `----------------------\n
-                总计：${totalMoney}(元)\n
-                节省：${promoteTotal}(元)\n
-                **********************`;
+    receipt += `\n----------------------\n
+总计：${totalMoney.toFixed(2)}(元)\n
+节省：${promoteTotal.toFixed(2)}(元)\n
+**********************`;
     return receipt;
 }
 
 // function printReceipt is consist of isBarcodeValid, transformShoppingListToObjArrWithMoreInfo, calculateFare and transformToString
-var printReceipt = (promotion, transformResult, ) => {
-    
-
+var printReceipt = (promotions, items, shoppingList) => {
+    let invalidBarcode = isBarcodeValid(items,shoppingList);
+    let transformResult = transformShoppingListToObjArrWithMoreInfo(invalidBarcode,shoppingList, items);
+    let receipt = createReceipt(promotions, transformResult);
+    return receipt;
 }
-
-
-
 
 module.exports={
     isBarcodeValid,
     statisticsCountByBarcodes,
     transformWithMoreInfo,
     transformShoppingListToObjArrWithMoreInfo,
-    createReceipt
-    
+    createReceipt,
+    printReceipt
 }
