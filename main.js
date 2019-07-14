@@ -14,11 +14,21 @@ var isBarcodeValid = (items, shoppingList)=>{
 
 var statisticsCountByBarcodes = (shoppingList)=> {
     let result =  shoppingList.reduce((initValue, cur) => {
-        if(cur in initValue)
+        let temp = transformByRegExp(cur);
+        if(temp.length == 1){
+            if(cur in initValue)
             initValue[cur]++;
-        else
-            initValue[cur] = 1;
-        return initValue;
+            else
+                initValue[cur] = 1;
+            return initValue;
+        }else{
+            if(temp[0] in initValue)
+            initValue[temp[0]] += Number(temp[1]);
+            else
+                initValue[temp[0]] = Number(temp[1]);
+            return initValue;
+        }
+        
     },{});
     let keys = Object.keys(result);
     return keys.map((key) => {
