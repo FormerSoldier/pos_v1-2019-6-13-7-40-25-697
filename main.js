@@ -48,7 +48,7 @@ var transformWithMoreInfo = (items, objList) => {
                     barcode: obj['barcode'],
                     name: item['name'],
                     unit: item['unit'],
-                    price: item['price'],
+                    price: item['price'].toFixed(2),
                     count: obj['count']
                 }
             }           
@@ -71,22 +71,20 @@ var createReceipt = (promotions,transformResult) => {
     let promoteTotal = 0.0;
     let receipt = '';
     let oneTotal = 0.0;
-    let promoteMoney = 0.0;
     let promotion = promotions[0];
-    receipt += '***<没钱赚商店>收据***\n\n'
+    receipt += '***<没钱赚商店>收据***\n'
     transformResult.forEach((item) => {
         oneTotal = item.price * item.count;
         if(promotion['barcodes'].includes(item['barcode']) && item['count'] > 2){
-            promoteMoney = Math.floor(item.count / 2) * item.price;
-            promoteTotal += promoteMoney;
-            oneTotal -= promoteMoney;
+            promoteTotal += item.price;
+            oneTotal -= item.price;
         }           
         totalMoney += oneTotal;
-        receipt += `名称：雪碧，数量：${item.count}瓶，单价：${item.price.toFixed(2)}(元)，小计：${oneTotal.toFixed(2)}(元)\n`;  
+        receipt += `名称：${item.name}，数量：${item.count}${item.unit}，单价：${Number(item.price).toFixed(2)}(元)，小计：${oneTotal.toFixed(2)}(元)\n`;  
     });
-    receipt += `\n----------------------\n
-总计：${totalMoney.toFixed(2)}(元)\n
-节省：${promoteTotal.toFixed(2)}(元)\n
+    receipt += `----------------------
+总计：${Number(totalMoney).toFixed(2)}(元)
+节省：${Number(promoteTotal).toFixed(2)}(元)
 **********************`;
     return receipt;
 }
