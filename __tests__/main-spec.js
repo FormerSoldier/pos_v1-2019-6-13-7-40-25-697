@@ -47,6 +47,20 @@ const items = [
     ]
   }];
 
+// test cases for function transformByRegExp
+it('should return [ITEM000005] when call transformByRegExp given "ITEM000005"',() =>{
+  expect(obj.transformByRegExp('ITEM000005')).toEqual(['ITEM000005']);
+});
+
+it('should return [ITEM000005,5] when call transformByRegExp given "ITEM000005-5"',() =>{
+  expect(obj.transformByRegExp('ITEM000005-5')).toEqual(['ITEM000005','5']);
+});
+
+it('should return [ITEM000002,5.5] when call transformByRegExp given "ITEM000002-5.5"',() =>{
+  expect(obj.transformByRegExp('ITEM000002-5.5')).toEqual(['ITEM000002','5.5']);
+});
+
+/*
 // test cases for function isBarcodeValid
 it('should return [] when call isBarcodeValid given ["ITEM000005","ITEM000001"]',() =>{
     expect(obj.isBarcodeValid(items,['ITEM000005','ITEM000001'])).toEqual([]);
@@ -96,4 +110,4 @@ it('',()=> {
 总计：6.00(元)\n
 节省：3.00(元)\n
 **********************`)
-});
+});*/

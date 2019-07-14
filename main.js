@@ -1,3 +1,12 @@
+var transformByRegExp = (item) =>{
+    let regExp = /(\w+)-(\d+\.\d+|\d+)?/;
+    let result = regExp.exec(item);
+    if(result == null || result ==undefined)
+        return [item];
+    else
+        return result.slice(1);
+}
+
 var isBarcodeValid = (items, shoppingList)=>{
     let itemsBarcodes = items.map((item)=>item['barcode']);
     return shoppingList.filter((item)=> !itemsBarcodes.includes(item));
@@ -81,6 +90,7 @@ var printReceipt = (promotions, items, shoppingList) => {
 }
 
 module.exports={
+    transformByRegExp,
     isBarcodeValid,
     statisticsCountByBarcodes,
     transformWithMoreInfo,
