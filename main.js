@@ -9,7 +9,7 @@ var transformByRegExp = (item) =>{
 
 var isBarcodeValid = (items, shoppingList)=>{
     let itemsBarcodes = items.map((item)=>item['barcode']);
-    return shoppingList.filter((item)=> !itemsBarcodes.includes(item));
+    return shoppingList.filter((item)=> !itemsBarcodes.includes(transformByRegExp(item)[0]));
 };
 
 var statisticsCountByBarcodes = (shoppingList)=> {
