@@ -1,6 +1,3 @@
-'use strict';
-
-//TODO: 请在该文件中实现练习要求并删除此注释
 var transformByRegExp = (item) =>{
     let regExp = /(\w+)-(\d+\.\d+|\d+)?/;
     let result = regExp.exec(item);
@@ -78,8 +75,8 @@ var createReceipt = (promotions,transformResult) => {
     receipt += '***<没钱赚商店>收据***\n'
     transformResult.forEach((item) => {
         oneTotal = item.price * item.count;
-        if(promotion['barcodes'].includes(item['barcode']) && item['count'] > 2){
-            promoteTotal += item.price;
+        if(promotion['barcodes'].includes(item['barcode']) && item['count'] >= 2){
+            promoteTotal += Number(item.price);
             oneTotal -= item.price;
         }           
         totalMoney += oneTotal;
