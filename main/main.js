@@ -100,12 +100,4 @@ var printReceipt = (promotions, items, shoppingList) => {
     return receipt;
 }
 
-module.exports={
-    transformByRegExp,
-    isBarcodeValid,
-    statisticsCountByBarcodes,
-    transformWithMoreInfo,
-    transformShoppingListToObjArrWithMoreInfo,
-    createReceipt,
-    printReceipt
-}
+module.exports= printReceipt

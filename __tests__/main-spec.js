@@ -114,7 +114,20 @@ it('should return [{barcode: "ITEM000005",name:"方便面",unit:"袋",price:4.50
         .toEqual([{barcode:'ITEM000005',name:'方便面',unit:'袋',price:4.50.toFixed(2),count:1},
         {barcode:'ITEM000001',name:'雪碧',unit:'瓶',price:3.00.toFixed(2),count:2}]);
 });
+it('',() =>{
+  expect(obj.transformShoppingListToObjArrWithMoreInfo([],['ITEM000001-3','ITEM000002-6.8','ITEM000004','ITEM000004','ITEM000004'],items))
+      .toEqual([{barcode:'ITEM000001',name:'雪碧',unit:'瓶',price:Number(3.00).toFixed(2),count:3},
+      {barcode:'ITEM000002',name:'苹果',unit:'斤',price:Number(5.50).toFixed(2),count:6.8},
+      {barcode:'ITEM000004',name:'电池',unit:'个',price:Number(2.00).toFixed(2),count:3}]);
+});
 
+
+it('the final test',() =>{
+  expect(obj.transformShoppingListToObjArrWithMoreInfo([],['ITEM000001-3','ITEM000002-6.8','ITEM000004','ITEM000004','ITEM000004'],items))
+      .toEqual([{barcode:'ITEM000001',name:'雪碧',unit:'瓶',price:Number(3.00).toFixed(2),count:3},
+      {barcode:'ITEM000002',name:'苹果',unit:'斤',price:Number(5.50).toFixed(2),count:6.8},
+      {barcode:'ITEM000004',name:'电池',unit:'个',price:Number(2.00).toFixed(2),count:3}]);
+});
 it('',()=> {
   expect(obj.createReceipt(promotions,[{barcode: 'ITEM000001',
   name: '雪碧',
@@ -149,10 +162,36 @@ it('',()=> {
 **********************`)
 });
 
+it('',()=> {
+  expect(obj.printReceipt(promotions,items, ['ITEM000001',
+  'ITEM000001',
+  'ITEM000001',
+  'ITEM000001',
+  'ITEM000001',
+  'ITEM000003-2.5',
+  'ITEM000005',
+  'ITEM000005-2'])).toEqual(`***<没钱赚商店>收据***
+名称：雪碧，数量：5瓶，单价：3.00(元)，小计：12.00(元)
+名称：荔枝，数量：2.5斤，单价：15.00(元)，小计：37.50(元)
+名称：方便面，数量：3袋，单价：4.50(元)，小计：9.00(元)
+----------------------
+总计：58.50(元)
+节省：7.50(元)
+**********************`)
+});
 
 it('',() =>{
-  expect(obj.transformShoppingListToObjArrWithMoreInfo([],['ITEM000001-3','ITEM000002-6.8','ITEM000004','ITEM000004','ITEM000004'],items))
-      .toEqual([{barcode:'ITEM000001',name:'雪碧',unit:'瓶',price:Number(3.00).toFixed(2),count:3},
-      {barcode:'ITEM000002',name:'苹果',unit:'斤',price:Number(5.50).toFixed(2),count:6.8},
-      {barcode:'ITEM000004',name:'电池',unit:'个',price:Number(2.00).toFixed(2),count:3}]);
+  expect(obj.transformShoppingListToObjArrWithMoreInfo([],['ITEM000001',
+  'ITEM000001',
+  'ITEM000001',
+  'ITEM000001',
+  'ITEM000001',
+  'ITEM000003-2.5',
+  'ITEM000005',
+  'ITEM000005-2'],items))
+      .toEqual([{barcode:'ITEM000001',name:'雪碧',unit:'瓶',price:3.00.toFixed(2),count:5},
+      {barcode:'ITEM000003',name:'荔枝',unit:'斤',price:15.00.toFixed(2),count:2.5},
+      {barcode:'ITEM000005',name:'方便面',unit:'袋',price:4.50.toFixed(2),count:3}
+      ]);
 });
+

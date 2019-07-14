@@ -75,8 +75,8 @@ var createReceipt = (promotions,transformResult) => {
     receipt += '***<没钱赚商店>收据***\n'
     transformResult.forEach((item) => {
         oneTotal = item.price * item.count;
-        if(promotion['barcodes'].includes(item['barcode']) && item['count'] > 2){
-            promoteTotal += item.price;
+        if(promotion['barcodes'].includes(item['barcode']) && item['count'] >= 2){
+            promoteTotal += Number(item.price);
             oneTotal -= item.price;
         }           
         totalMoney += oneTotal;
